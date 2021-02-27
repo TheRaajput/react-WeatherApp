@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   container:{
     height:dev_height,
     width:dev_width,
-    backgroundColor:"black"
+    backgroundColor:"#0D0D0D"
   },
 })
