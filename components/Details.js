@@ -3,7 +3,14 @@ import { View, Text, StyleSheet, Image} from 'react-native'
 
 
 const Details = () => {
-    const dataUrl = 'http://api.openweathermap.org/data/2.5/weather?q=London&appid=6fd9b781eb5a93e3f5a1c5e419513eb9';
+    function convertTime(unixTime){
+        let dt = new Date(unixTime * 1000)
+        let h = dt.getHours()
+        let m = "0" + dt.getMinutes()
+        let t = h + ":" + m.substr(-2)
+        return t
+    }
+    const dataUrl = 'http://api.openweathermap.org/data/2.5/weather?q=Varanasiexpo&appid=6fd9b781eb5a93e3f5a1c5e419513eb9';
     const [desc, setDesc] = useState("");
     const [temp, setTemp] = useState(0);
     const [place,setPlace] = useState("")
@@ -12,6 +19,8 @@ const Details = () => {
     const [mintemp,setMin] = useState(0)
     const [humidity, setHumidity] = useState(0)
     const [visibility, setVis] = useState(0)
+    const [sunrise, setSunRise] = useState(0)
+    const [sunset, setSunSet] = useState(0)
     useEffect(()=>{
         fetch(dataUrl)
         .then(response => response.json())
@@ -24,6 +33,8 @@ const Details = () => {
             setMin(((json.main.temp_min)-273).toFixed(2))
             setHumidity(json.main.humidity)
             setVis(json.visibility)
+            setSunRise(json.sys.sunrise)
+            setSunSet(json.sys.sunset)
         })
         .catch((error)=>alert(error))
     });
@@ -46,7 +57,8 @@ const Details = () => {
                     <Text style={styles.info_text}>Min Temp:  {mintemp+" °C"}</Text>
                     <Text style={styles.info_text}>Humidity:  {humidity}</Text>
                     <Text style={styles.info_text}>Visibility:  {visibility+" m"}</Text>
-                    <Text style={styles.info_text}>humidity</Text>
+                    <Text style={styles.info_text}>Sunrise:  {convertTime(sunrise)}</Text>
+                    <Text style={styles.info_text}>Sunset:  {convertTime(sunset)}</Text>
                 </View>
             </View>
         </View>
