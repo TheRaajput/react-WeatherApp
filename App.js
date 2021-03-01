@@ -1,8 +1,7 @@
 import React from 'react';
 import {Dimensions, 
   StyleSheet, 
-  SafeAreaView, 
-  ImageBackground
+  SafeAreaView
 } from 'react-native';
 
 import SearchBar from './components/SearchBar.js'
